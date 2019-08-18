@@ -5,6 +5,7 @@ name: Main
 on:
   push:
     paths:
+      - '*'
       - '!README.md'
 
 jobs:
