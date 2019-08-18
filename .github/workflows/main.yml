@@ -2,11 +2,11 @@
 # https://github.com/actions/docker
 name: Main
 
-on:
-  push:
-    paths:
-      - '**/*'
-      - '!README.md'
+on: [push]
+  # push:
+  #   paths:
+  #     - '**/*'
+  #     - '!README.md'
 
 jobs:
   build:
@@ -18,7 +18,10 @@ jobs:
           fetch-depth: 1
       - name: Build
         run: cargo build
-      - name: Run tests
+      - name: Test
         run: cargo test
       # https://github.com/actions/action-builder/tree/master/docker
-      #- uses: actions/action-builder/docker@master
+      - name: Package
+        uses: actions/action-builder/docker@master
+        with:
+          args: 
