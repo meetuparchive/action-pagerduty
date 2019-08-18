@@ -7,9 +7,20 @@ pub struct Event {
     pub check_suite: CheckSuite,
 }
 
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "snake_case")]
+pub enum Conclusion {
+    Success,
+    Failure,
+    Neutral,
+    Cancelled,
+    TimedOut,
+    ActionRequired,
+}
+
 #[derive(Deserialize)]
 pub struct CheckSuite {
-    pub conclusion: String,
+    pub conclusion: Conclusion,
 }
 
 // https://developer.github.com/v3/activity/events/types/#webhook-event-name-1

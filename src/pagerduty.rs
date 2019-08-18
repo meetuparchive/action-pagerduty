@@ -1,28 +1,23 @@
-use reqwest::{Client as HttpClient, Method, Request, StatusCode};
+use reqwest::{Client, StatusCode};
 use serde::Serialize;
 use std::error::Error;
 
 pub trait PagerDuty {
-    fn send(
+    fn notify(
         &self,
+        pd_token: String,
         event: Event,
     ) -> Result<StatusCode, Box<dyn Error>>;
 }
 
-pub struct Client {
-    pub pd_token: String,
-    pub client: HttpClient,
-}
-
 impl PagerDuty for Client {
-    fn send(
+    fn notify(
         &self,
+        pd_token: String,
         event: Event,
     ) -> Result<StatusCode, Box<dyn Error>> {
         // https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2
-        // https://v2.developer.pagerduty.com/docs/authentication#api-token-authentication
-        let Client { pd_token, client } = self;
-        Ok(client
+        Ok(self
             .post("https://events.pagerduty.com/v2/enqueue")
             .header("Authorization", format!("Token token={}", pd_token))
             .json(&event)
@@ -30,6 +25,8 @@ impl PagerDuty for Client {
             .status())
     }
 }
+
+// https://v2.developer.pagerduty.com/docs/authentication#api-token-authentication
 
 #[derive(Serialize)]
 #[serde(rename_all = "lowercase")]
