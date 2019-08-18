@@ -1,6 +1,6 @@
 # todo: create docker publish workflow
 # https://github.com/actions/docker
-name: Rust
+name: Main
 
 on: [push]
 
