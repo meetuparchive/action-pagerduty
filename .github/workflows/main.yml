@@ -23,6 +23,7 @@ jobs:
         run: cargo test
       # https://github.com/actions/action-builder/tree/master/docker
       - name: Package
-        uses: actions/action-builder/docker@master
-        # with:
-        #   args: 
+        uses: actions/docker/cli@master
+        #uses: actions/action-builder/docker@master
+        with:
+          args: build -t action-pagerduty .
