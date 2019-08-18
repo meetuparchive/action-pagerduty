@@ -2,7 +2,10 @@
 # https://github.com/actions/docker
 name: Main
 
-on: [push]
+on:
+  push:
+    paths:
+      - '!README.md'
 
 jobs:
   build:
