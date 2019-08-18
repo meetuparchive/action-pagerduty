@@ -59,8 +59,7 @@ where
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    run(envy::from_env()?, Client::new())?;
-    Ok(())
+    run(envy::from_env()?, Client::new())
 }
 
 #[cfg(test)]
