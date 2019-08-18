@@ -20,7 +20,7 @@ RUN cargo build --target x86_64-unknown-linux-musl --release
 # now copy the updated src and build artifacts
 COPY src src
 RUN cargo build --target x86_64-unknown-linux-musl --release \
-	&& trip /usr/src/app/target/x86_64-unknown-linux-musl/release/action-pagerduty
+	&& strip /usr/src/app/target/x86_64-unknown-linux-musl/release/action-pagerduty
 
 FROM scratch
 
