@@ -18,5 +18,3 @@ jobs:
         run: cargo test --verbose
       # https://github.com/actions/action-builder/tree/master/docker
       - uses: actions/action-builder/docker@master
-        run: make
-        args: build
