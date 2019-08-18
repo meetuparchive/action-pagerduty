@@ -28,11 +28,10 @@ impl PagerDuty for Client {
 
 // https://v2.developer.pagerduty.com/docs/authentication#api-token-authentication
 
-#[derive(Serialize)]
+#[derive(Serialize, PartialEq, Debug)]
 #[serde(rename_all = "lowercase")]
 pub enum Action {
     Trigger,
-    Acknowledge,
     Resolve,
 }
 

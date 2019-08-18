@@ -7,7 +7,7 @@ pub struct Event {
     pub check_suite: CheckSuite,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum Conclusion {
     Success,
