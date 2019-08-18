@@ -13,8 +13,8 @@ jobs:
         with:
           fetch-depth: 1
       - name: Build
-        run: cargo build --verbose
+        run: cargo build
       - name: Run tests
-        run: cargo test --verbose
+        run: cargo test
       # https://github.com/actions/action-builder/tree/master/docker
       - uses: actions/action-builder/docker@master
