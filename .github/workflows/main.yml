@@ -1,0 +1,23 @@
+# todo: create docker publish workflow
+# https://github.com/actions/docker
+name: Rust
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test --verbose
+      - name: Docker build
+        # https://github.com/actions/action-builder/tree/master/docker
+        uses: actions/action-builder/docker@master
+        run: make
+        args: build
