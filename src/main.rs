@@ -1,11 +1,14 @@
 mod github;
 mod pagerduty;
 
-use crate::pagerduty::{Action, Event, PagerDuty, Payload};
 use github::Conclusion;
+use pagerduty::{Action, Event, PagerDuty, Payload};
 use reqwest::Client;
 use serde::Deserialize;
-use std::error::Error;
+use std::{error::Error, process::exit};
+
+// https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#exit-codes-and-statuses
+const NEUTRAL_EXIT: i32 = 78;
 
 // https://help.github.com/en/articles/virtual-environments-for-github-actions#default-environment-variables
 #[derive(Deserialize)]
@@ -37,12 +40,15 @@ where
 
     let event = github::parse(github_event_path)?;
     let conclusion = event.check_suite.conclusion;
-    println!("conclusion of checksuite was {:?}", conclusion);
+    println!(
+        "conclusion of checksuite for {:#?} was {:?}",
+        event.check_suite.app, conclusion
+    );
 
     if conclusion == Conclusion::Cancelled {
-        return Ok(())
+        exit(NEUTRAL_EXIT)
     }
-    
+
     pagerduty.notify(
         pd_token,
         Event {

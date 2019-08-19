@@ -18,9 +18,17 @@ pub enum Conclusion {
     ActionRequired,
 }
 
+#[derive(Deserialize, Debug)]
+pub struct App {
+    pub name: String,
+    pub id: usize,
+    //pub check_runs_url: String
+}
+
 #[derive(Deserialize)]
 pub struct CheckSuite {
     pub conclusion: Conclusion,
+    pub app: App,
 }
 
 // https://developer.github.com/v3/activity/events/types/#webhook-event-name-1
