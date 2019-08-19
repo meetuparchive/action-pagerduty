@@ -10,17 +10,16 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app
+WORKDIR /app
 RUN rustup target add x86_64-unknown-linux-musl
 # cache deps https://blog.jawg.io/docker-multi-stage-build/
-RUN USER=root cargo init
-COPY Cargo.toml .
-RUN cargo build --target x86_64-unknown-linux-musl --release
-
-# now copy the updated src and build artifacts
-COPY src src
+# RUN USER=root cargo init
+# COPY Cargo.toml .
+# RUN cargo build --target x86_64-unknown-linux-musl --release
+# COPY src src
+COPY . .
 RUN cargo build --target x86_64-unknown-linux-musl --release \
-	&& strip /usr/src/app/target/x86_64-unknown-linux-musl/release/action-pagerduty
+	&& strip /app/target/x86_64-unknown-linux-musl/release/action-pagerduty
 
 FROM scratch
 
@@ -38,6 +37,6 @@ COPY --from=builder \
 	/etc/ssl/certs/ca-certificates.crt \
 	/etc/ssl/certs/
 COPY --from=builder \
-	/usr/src/app/target/x86_64-unknown-linux-musl/release/action-pagerduty \
+	/app/target/x86_64-unknown-linux-musl/release/action-pagerduty \
 	/action-pagerduty
 ENTRYPOINT ["/action-pagerduty"]
