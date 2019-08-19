@@ -2,11 +2,10 @@
 # https://github.com/actions/docker
 name: Main
 
-on: [push]
-  # push:
-  #   paths:
-  #     - '**/*'
-  #     - '!README.md'
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   build:
