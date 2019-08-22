@@ -1,4 +1,4 @@
-# action pagerduty 
+# action pagerduty [![](https://github.com/meetup/action-pagerduty/workflows/Main/badge.svg)](https://github.com/meetup/action-pagerduty/actions)
 
 > [Github Action](https://github.com/features/actions) for [PagerDuty](https://www.pagerduty.com/) notifications on [`check_suite events`](https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events)
 
