@@ -25,8 +25,8 @@ FROM scratch
 
 # https://help.github.com/en/articles/metadata-syntax-for-github-actions#about-yaml-syntax-for-github-actions
 LABEL version="0.1.0" \
-  repository="https://github.com/meetup/actions-pagerduty/" \
-  homepage="https://github.com/meetup/actions-pagerduty" \
+  repository="https://github.com/meetup/action-pagerduty/" \
+  homepage="https://github.com/meetup/action-pagerduty" \
   maintainer="Meetup" \
   "com.github.actions.name"="PagerDuty" \
   "com.github.actions.description"="Sends PagerDuty notifications as a result of Github Actions" \
